@@ -1,0 +1,36 @@
+version: "1"
+
+package:
+  id: io.github.Nanairo
+  name: Nanairo
+  version: 0.0.0.1
+  kind: app
+  description: |
+    Nanairo is a physically plausible spectral renderer.
+
+command:
+  - /opt/apps/io.github.Nanairo/files/bin/Nanairo
+
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/byzin/Nanairo.git
+    version: master
+    commit: 23fb6deeec73509c538a9c21009e12be63e8d0e4
+
+build: |
+  cd /project/linglong/sources/Nanairo.git
+  cp resources/image/logo.png resources/image/Nanairo.png
+  cd source/dependencies/cxxopts
+  git apply ../../../../../../0001-install.patch
+
+  cd /project/linglong/sources/Nanairo.git
+  git apply ../../../0002-install.patch
+  mkdir -p build
+  cd build
+  cmake .. \
+        -DCMAKE_INSTALL_PREFIX=${PREFIX}
+  cmake --build . --target install -j$(nproc --all)
