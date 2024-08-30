@@ -1,0 +1,25 @@
+From 923ff5f7a48f2b79015e05350e5d0db4b8076b20 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 20 Aug 2024 21:36:26 +0800
+Subject: [PATCH] install
+
+---
+ include/cxxopts.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/cxxopts.hpp b/include/cxxopts.hpp
+index 6feee25..a44f9d8 100644
+--- a/include/cxxopts.hpp
++++ b/include/cxxopts.hpp
+@@ -37,7 +37,7 @@ THE SOFTWARE.
+ #include <unordered_map>
+ #include <unordered_set>
+ #include <vector>
+-
++#include <limits>
+ #ifdef __cpp_lib_optional
+ #include <optional>
+ #define CXXOPTS_HAS_OPTIONAL
+-- 
+2.43.4
+

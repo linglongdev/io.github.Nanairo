@@ -1,0 +1,77 @@
+From 12102dc9062f0955d0e04347ac37a75903f9d836 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 20 Aug 2024 21:51:17 +0800
+Subject: [PATCH] install
+
+---
+ CMakeLists.txt        |  7 +++++++
+ Nanairo.desktop       | 11 +++++++++++
+ cmake/packaging.cmake | 10 ++--------
+ 3 files changed, 20 insertions(+), 8 deletions(-)
+ create mode 100644 Nanairo.desktop
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index be780f0..4b1ca83 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -87,3 +87,10 @@ if(${NANAIRO_BUILD_TESTS})
+   include(${PROJECT_SOURCE_DIR}/test/config.cmake)
+   buildUnitTest()
+ endif()
++
++install(FILES resources/image/Nanairo.png
++        DESTINATION share/icons)
++
++
++install(FILES Nanairo.desktop
++            DESTINATION share/applications)
+\ No newline at end of file
+diff --git a/Nanairo.desktop b/Nanairo.desktop
+new file mode 100644
+index 0000000..11ad569
+--- /dev/null
++++ b/Nanairo.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=Nanairo
++Name=Nanairo
++Name[zh_CN]=Nanairo
++Icon=Nanairo
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=Nanairo
++Version=1.0
+\ No newline at end of file
+diff --git a/cmake/packaging.cmake b/cmake/packaging.cmake
+index c686c90..954ff23 100644
+--- a/cmake/packaging.cmake
++++ b/cmake/packaging.cmake
+@@ -51,13 +51,7 @@ endmacro(setNanairoPackProperties)
+ 
+ #
+ function(setNanairoPackInfoForLinux)
+-  configure_file(${PROJECT_SOURCE_DIR}/packaging/linux_exec_script.sh.in
+-                 ${PROJECT_BINARY_DIR}/packaging/${PROJECT_NAME}
+-                 @ONLY)
+-  configure_file(${PROJECT_SOURCE_DIR}/packaging/linux_install_script.cmake.in
+-                 ${PROJECT_BINARY_DIR}/packaging/install_script.cmake
+-                 @ONLY)
+-  install(SCRIPT ${PROJECT_BINARY_DIR}/packaging/install_script.cmake)
++
+ endfunction(setNanairoPackInfoForLinux)
+ 
+ 
+@@ -104,7 +98,7 @@ endfunction(setNanairoPackInfoForWindows)
+ #
+ function(setCommonNanairoPackInfo)
+   install(TARGETS ${PROJECT_NAME}
+-          DESTINATION .
++          DESTINATION bin
+           COMPONENT ${PROJECT_NAME})
+   install(DIRECTORY ${PROJECT_BINARY_DIR}/resources
+           DESTINATION .
+-- 
+2.43.4
+
